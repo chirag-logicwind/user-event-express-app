@@ -1,0 +1,31 @@
+# API Routes
+
+Method	Route	                    Description
+------------------------------------------------------------
+POST	/api/auth/register	        Register new user
+POST	/api/auth/login	            Login
+POST	/api/auth/logout	        Logout
+POST	/api/auth/change-password	Change own password
+POST	/api/auth/reset-password	Request password reset
+POST	/api/auth/update-password	Set new password
+
+
+# Create Event:
+POST /api/events 
+token: <token>
+Body: {
+  "title": "React Conference",
+  "description": "A dev meetup",
+  "date": "2025-08-10"
+}
+
+# Invite Users:
+POST /api/events/1/invite
+token: <token>
+Body: {
+  "emails": ["invitee1@example.com", "invitee2@example.com"]
+}
+
+# List Events (search + pagination):
+GET /api/events?page=1&limit=5&search=react&sort=date&order=ASC&startDate=2025-08-01
+token: <token>
