@@ -29,3 +29,16 @@ Body: {
 # List Events (search + pagination):
 GET /api/events?page=1&limit=5&search=react&sort=date&order=ASC&startDate=2025-08-01
 token: <token>
+
+# get single event
+GET /api/events/1
+token: <token>
+
+# update event
+PUT /api/events/2
+token: <token>
+Body: {
+  "title": "React Conference",
+  "description": "A dev meetup",
+  "date": "2025-08-10"
+}

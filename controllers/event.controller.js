@@ -13,13 +13,15 @@ export const createEvent = async (req, res) => {
 //  invite
 export const inviteUsers = async (req, res) => {
     const eventId = req.params.id;
-    const { emails } = req.body;
+    const { emails } = req.body;    
     
     const event = await Event.findOne({ where: { id: eventId, creatorId: req.user.id } });
     if(!event)
         return res.status(404).json({ message: 'Event not found..!' });
     
     const invites = emails.map( email => ({ email, EventId: eventId }) );
+    await EventInvite.bulkCreate(invites);
+    res.json({ message: 'Users invited for this event.' });
 }
 
 // list
@@ -77,7 +79,7 @@ export const getEventDetails = async (req, res) => {
 
 //  update
 export const updateEvent = async (req, res) => {
-    const event = Event.findOne({ where: { id: req.params.id, 'creatorId': req.user.id } });
+    const event = await Event.findOne({ where: { id: req.params.id, 'creatorId': req.user.id } });    
     if(!event)
         return res.status(404).send({ message: 'Event not found' });
     
